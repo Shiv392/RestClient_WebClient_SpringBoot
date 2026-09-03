@@ -1,0 +1,58 @@
+⭐⭐⭐ Step 1 — RestClient setup
+Spring Boot mein pehle RestClient ka object/bean banayenge:
+
+@Configuration
+public class RestClientConfig {
+    @Bean
+    public RestClient restClient() {
+        return RestClient.builder()
+                .baseUrl("https://jsonplaceholder.typicode.com")
+                .build();
+    }
+}
+
+Ab iska matlab:
+RestClient
+    ↓
+Base URL = https://jsonplaceholder.typicode.com
+
+⭐⭐⭐ Step 2 - TodoService 
+@Service
+public class TodoService {
+    private final RestClient restClient;
+    public TodoService(
+        RestClient _restClient
+    ){
+        restClient = _restClient;
+    }
+
+    public List<Todos> getTodos(){
+        return restClient.get()
+        .uri("/todos")
+        .retrieve()
+        .body(new ParameterizedTypeReference<List<Todos>>() {});
+
+        //here body() will convert API Response into Java Object of given type 
+        //then return;
+    }
+}
+
+⭐⭐⭐ Step 3 - Controller file 
+@RestController
+@RequestMapping("/todo")
+public class TodoController {
+    private final TodoService todoService;
+    public TodoController(TodoService _TodoService){
+        todoService = _TodoService;
+    }
+    
+    @GetMapping("")
+    public ResponseEntity<ApiResponse> getTodos() {
+        List<Todos>todoUsers = todoService.getTodos();
+        return ResponseEntity.status(200)
+        .body(
+            new ApiResponse(true, "Todo List fetched successfully", todoUsers)
+        );
+    }
+    
+}
