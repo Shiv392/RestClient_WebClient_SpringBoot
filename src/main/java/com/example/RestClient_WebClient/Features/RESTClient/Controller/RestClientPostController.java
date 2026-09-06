@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/posts")
-public class PostController {
+@RequestMapping("/restclient/posts")
+public class RestClientPostController {
 
     private final PostService postService;
 
-    public PostController(PostService _postService){
+    public RestClientPostController(PostService _postService){
         postService = _postService;
     }
     

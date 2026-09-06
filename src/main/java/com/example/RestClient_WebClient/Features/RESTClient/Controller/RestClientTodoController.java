@@ -2,28 +2,26 @@ package com.example.RestClient_WebClient.Features.RESTClient.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.RestClient_WebClient.Features.RESTClient.Services.TodoService;
 import com.example.RestClient_WebClient.Utils.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.List;
 import com.example.RestClient_WebClient.Features.RESTClient.Dtos.Todos;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@RequestMapping("/todo")
-public class TodoController {
+@RequestMapping("/restclient/todo")
+public class RestClientTodoController {
 
     private final TodoService todoService;
 
-    public TodoController(TodoService _TodoService){
+    public RestClientTodoController(TodoService _TodoService){
         todoService = _TodoService;
     }
     
+    //get todo items list. 
     @GetMapping("")
     public ResponseEntity<ApiResponse> getTodos() {
         List<Todos>todoUsers = todoService.getTodos();
@@ -33,6 +31,7 @@ public class TodoController {
         );
     }
     
+    //get todo item by id. 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse> getMethodName(@PathVariable int id) {
         Todos todos = todoService.getTodoById(id);
