@@ -11,10 +11,10 @@ import com.example.RestClient_WebClient.Features.RESTClient.Dtos.Todos;
 import reactor.core.publisher.Mono;
 
 @Service
-public class TodoService {
+public class WebClientTodoService {
     private final WebClient webClient;
 
-    public TodoService(WebClient _webClient){
+    public WebClientTodoService(WebClient _webClient){
         webClient = _webClient;
     }
 

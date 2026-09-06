@@ -75,4 +75,13 @@ public class WebClientPostService {
         .bodyToMono(Post.class)
         .map(post-> true);
     }
+
+    //return only if id is even
+    public Mono<Post> evenIdPost(int id){
+        return webClient.get()
+        .uri("/posts/{id}", id)
+        .retrieve()
+        .bodyToMono(Post.class)
+        .filter(post-> post.getId()%2==0);
+    }
 }

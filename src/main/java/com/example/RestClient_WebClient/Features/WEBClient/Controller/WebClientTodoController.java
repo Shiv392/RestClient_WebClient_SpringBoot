@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.RestClient_WebClient.Features.RESTClient.Dtos.Todos;
-import com.example.RestClient_WebClient.Features.WEBClient.Services.TodoService;
+import com.example.RestClient_WebClient.Features.WEBClient.Services.WebClientTodoService;
 import com.example.RestClient_WebClient.Utils.ApiResponse;
 
 import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/webclient/todos")
-public class TodoController {
+public class WebClientTodoController {
 
-    private final TodoService todoService;
+    private final WebClientTodoService todoService;
 
-    public TodoController(TodoService _todoService){
+    public WebClientTodoController(WebClientTodoService _todoService){
         todoService = _todoService;
     }
     
